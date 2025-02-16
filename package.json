@@ -8,7 +8,8 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "compose:dev": "docker compose --env-file .env.dev up -d"
   },
   "keywords": [],
   "author": "",
