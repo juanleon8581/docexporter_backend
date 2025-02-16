@@ -11,16 +11,22 @@ const envSchema = z.object({
   SUPABASE_KEY: z.string(),
 });
 
-const getEnvs = () => {
+const loadEnv = () => {
+  const nodeEnv = process.env.NODE_ENV ?? "dev";
+  const envFilePath = `.env.${nodeEnv}`;
+
+  const envVars = require("dotenv").config({ path: envFilePath });
+
   try {
-    console.log(process.env);
-    const envs = envSchema.parse(process.env);
-    console.log(envs);
+    const envs = envSchema.parse(envVars.parsed);
+    console.log("envsss: ", envs);
     return envs;
   } catch (error) {
     console.error("❌ Invalid environment variables:", error);
     throw new Error("Failed to validate environment variables");
   }
 };
-const envs = getEnvs();
+
+const envs = loadEnv();
+
 export default envs;
