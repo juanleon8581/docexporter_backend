@@ -1,21 +1,15 @@
 import express from "express";
-import dotenv from "dotenv";
-
-// Cargar variables de entorno
-dotenv.config();
+import envs from "./config/envs";
 
 const app = express();
-const PORT = process.env.PORT ?? 3000;
+const port = envs.PORT ?? 3000;
 
-// Middleware para parsear JSON
 app.use(express.json());
 
-// Ruta de prueba
 app.get("/", (req, res) => {
-  res.send("Backend Auth System is running!");
+  res.send("¡Backend en funcionamiento!");
 });
 
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor corriendo en http://localhost:${port}`);
 });
