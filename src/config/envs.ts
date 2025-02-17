@@ -19,7 +19,6 @@ const loadEnv = () => {
 
   try {
     const envs = envSchema.parse(envVars.parsed);
-    console.log("envsss: ", envs);
     return envs;
   } catch (error) {
     console.error("❌ Invalid environment variables:", error);

@@ -1,15 +1,16 @@
-import express from "express";
-import envs from "./config/envs";
+import envs from "@/config/envs";
+import { Server } from "@/presentation/server";
+import { AppRoutes } from "./presentation/routes";
 
-const app = express();
-const port = envs.PORT ?? 3000;
+(async () => {
+  main();
+})();
 
-app.use(express.json());
+function main() {
+  const server = new Server({
+    port: envs.PORT,
+    routes: AppRoutes.routes,
+  });
 
-app.get("/", (req, res) => {
-  res.send("¡Backend en funcionamiento!");
-});
-
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+  server.start();
+}

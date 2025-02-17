@@ -137,3 +137,6 @@ dist
 # Custom
 # Database
 /postgres*
+
+# Llm Generator
+repomix-output.txt
