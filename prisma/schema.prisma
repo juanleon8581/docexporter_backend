@@ -12,3 +12,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String   @id @default(cuid())
+  authId    String   @unique
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  billingStatements BillingStatement[]
+
+  @@map("users") // Nombre de la tabla en la base de datos
+}
+
+model BillingStatement {
+  id            String   @id @default(cuid())
+  for           String
+  nit           String
+  dni           String
+  role          String
+  bank          String
+  accountNumber String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("billing_statements")
+}
