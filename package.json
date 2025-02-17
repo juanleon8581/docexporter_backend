@@ -8,6 +8,7 @@
     "build": "tsc",
     "dev": "ts-node src/index.ts",
     "prisma:migrate": "prisma migrate dev",
+    "migrate:postgres:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "prisma:studio": "prisma studio",
     "compose:dev": "docker compose --env-file .env.dev up -d"
   },
