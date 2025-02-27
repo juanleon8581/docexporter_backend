@@ -1,11 +1,11 @@
 import { UserEntity } from "@/domain/entities";
 import { UserRepository } from "@/domain/repositories";
 
-export interface DeleteUserUseCase {
+interface DeleteUserUseCase {
   execute(id: string): Promise<UserEntity>;
 }
 
-export class DeleteUserUseCase implements DeleteUserUseCase {
+export class DeleteUser implements DeleteUserUseCase {
   constructor(private readonly repository: UserRepository) {}
 
   execute(id: string): Promise<UserEntity> {

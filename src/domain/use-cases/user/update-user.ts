@@ -2,11 +2,11 @@ import { UpdateUserDto } from "@/domain/dtos";
 import { UserEntity } from "@/domain/entities";
 import { UserRepository } from "@/domain/repositories";
 
-export interface UpdateUser {
+interface UpdateUserUserCase {
   execute(dto: UpdateUserDto): Promise<UserEntity>;
 }
 
-export class UpdateUserUserCase implements UpdateUser {
+export class UpdateUser implements UpdateUserUserCase {
   constructor(private readonly repository: UserRepository) {}
 
   execute(dto: UpdateUserDto): Promise<UserEntity> {

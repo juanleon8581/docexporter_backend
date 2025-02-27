@@ -1,7 +1,7 @@
 import { UserEntity } from "@/domain/entities";
 import { UserRepository } from "@/domain/repositories";
 
-export interface GetUsersUseCase {
+interface GetUsersUseCase {
   execute(): Promise<UserEntity[]>;
 }
 
