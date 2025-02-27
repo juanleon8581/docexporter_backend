@@ -1,4 +1,4 @@
-export class CreatePayOrderDto {
+export class CreatePayOrderTemplateDto {
   constructor(
     public readonly nameFor: string,
     public readonly nitFor?: string,
@@ -8,14 +8,23 @@ export class CreatePayOrderDto {
     public readonly accountNumber?: string
   ) {}
 
-  static create(props: { [key: string]: any }): [string?, CreatePayOrderDto?] {
+  static create(props: {
+    [key: string]: any;
+  }): [string?, CreatePayOrderTemplateDto?] {
     const { nameFor, nitFor, dni, role, bank, accountNumber } = props;
 
     if (!nameFor) return ["Invalid Data"];
 
     return [
       ,
-      new CreatePayOrderDto(nameFor, nitFor, dni, role, bank, accountNumber),
+      new CreatePayOrderTemplateDto(
+        nameFor,
+        nitFor,
+        dni,
+        role,
+        bank,
+        accountNumber
+      ),
     ];
   }
 }
