@@ -1,9 +1,10 @@
 export class PayOrderTemplateEntity {
   constructor(
     public readonly id: string,
-    public readonly nameFor: string,
+    public readonly nameEntry: string,
     public readonly createdAt: Date,
     public readonly updatedAt: Date,
+    public readonly nameFor?: string,
     public readonly nitFor?: string,
     public readonly dni?: string,
     public readonly role?: string,
@@ -20,9 +21,10 @@ export class PayOrderTemplateEntity {
   static fromJson(json: { [key: string]: any }): PayOrderTemplateEntity {
     const {
       id,
-      nameFor,
+      nameEntry,
       createdAt,
       updatedAt,
+      nameFor,
       nitFor,
       dni,
       role,
@@ -32,7 +34,7 @@ export class PayOrderTemplateEntity {
       deleted = false,
     } = json;
 
-    if (!id || !nameFor) {
+    if (!id || !nameEntry) {
       throw new Error("Invalid JSON");
     }
 
@@ -53,9 +55,10 @@ export class PayOrderTemplateEntity {
 
     return new PayOrderTemplateEntity(
       id,
-      nameFor,
+      nameEntry,
       createdAtProcessed,
       updatedAtProcessed,
+      nameFor,
       nitFor,
       dni,
       role,
