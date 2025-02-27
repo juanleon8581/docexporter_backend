@@ -1,8 +1,10 @@
-import { CreateUserDto } from "../dtos";
+import { CreateUserDto, UpdateUserDto } from "../dtos";
 import { UserEntity } from "../entities";
 
 export abstract class UserRepository {
   abstract create(createUserDto: CreateUserDto): Promise<UserEntity>;
+
+  abstract update(updateDto: UpdateUserDto): Promise<UserEntity>;
 
   abstract getAll(): Promise<UserEntity[]>;
 
