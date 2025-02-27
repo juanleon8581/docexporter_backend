@@ -35,8 +35,8 @@ export class UserEntity {
       throw new Error("Invalid date");
     }
 
-    const updateAtProcessed: Date | undefined = this.processDate(updatedAt);
-    if (!updateAtProcessed || isNaN(updateAtProcessed.getTime())) {
+    const updatedAtProcessed: Date | undefined = this.processDate(updatedAt);
+    if (!updatedAtProcessed || isNaN(updatedAtProcessed.getTime())) {
       throw new Error("Invalid date");
     }
 
@@ -51,7 +51,7 @@ export class UserEntity {
       name,
       lastname,
       createdAtProcessed,
-      updateAtProcessed,
+      updatedAtProcessed,
       deleted,
       deletedAtProcessed
     );
