@@ -7,7 +7,7 @@
     "start": "pnpm build && node dist/index.js",
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:dev": "dotenv -e .env.dev prisma migrate dev",
     "migrate:postgres:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "prisma:studio": "prisma studio",
     "compose:dev": "docker compose --env-file .env.dev up -d"
