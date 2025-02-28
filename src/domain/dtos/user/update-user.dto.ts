@@ -1,10 +1,22 @@
 export class UpdateUserDto {
-  constructor(public readonly name: string, public readonly lastname: string) {}
+  constructor(
+    public readonly id: string,
+    public readonly name?: string,
+    public readonly lastname?: string
+  ) {}
+
+  get values() {
+    const values: { [key: string]: any } = {};
+    if (this.name) values.name = this.name;
+    if (this.lastname) values.lastname = this.lastname;
+
+    return values;
+  }
 
   static create(props: { [key: string]: any }): [string?, UpdateUserDto?] {
-    const { name, lastname } = props;
-    if (!name || !lastname) return ["invalid Data"];
+    const { id, name, lastname } = props;
+    if (!id) return ["invalid Data"];
 
-    return [, new UpdateUserDto(name, lastname)];
+    return [, new UpdateUserDto(id, name, lastname)];
   }
 }
