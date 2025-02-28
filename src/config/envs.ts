@@ -4,7 +4,7 @@ import { z } from "zod";
 const envSchema = z.object({
   NODE_ENV: z.enum(["dev", "prod", "qa"]).default("dev"),
   PORT: z.coerce.number().default(3000),
-  DATABASE_PASS: z.string(),
+  POSTGRES_PASSWORD: z.string(),
   DATABASE_URL: z.string().url({ message: "Must be a valid URL" }),
   JWT_SECRET: z.string().min(32, { message: "Must have almost 32 characters" }),
   SUPABASE_URL: z.string(),
