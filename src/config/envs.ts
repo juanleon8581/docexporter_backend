@@ -2,7 +2,7 @@ import "dotenv/config";
 import { z } from "zod";
 
 const envSchema = z.object({
-  NODE_ENV: z.enum(["dev", "pord", "qa"]).default("dev"),
+  NODE_ENV: z.enum(["dev", "prod", "qa"]).default("dev"),
   PORT: z.coerce.number().default(3000),
   DATABASE_PASS: z.string(),
   DATABASE_URL: z.string().url({ message: "Must be a valid URL" }),
