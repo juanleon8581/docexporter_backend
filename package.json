@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pnpm build && node dist/index.js",
     "build": "tsc",
-    "dev": "ts-node src/index.ts",
+    "dev": "tsnd -r tsconfig-paths/register src/index.ts --watch",
     "prisma:migrate:dev": "dotenv -e .env.dev prisma migrate dev",
     "migrate:postgres:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "prisma:studio": "prisma studio",
@@ -31,6 +31,8 @@
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
-    "dotenv-cli": "^8.0.0"
+    "dotenv-cli": "^8.0.0",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0"
   }
 }

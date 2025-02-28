@@ -1,6 +1,6 @@
 import envs from "@/config/envs";
 import { Server } from "@/presentation/server";
-import { AppRoutes } from "./presentation/routes";
+import { AppRoutes } from "@/presentation/routes";
 
 (async () => {
   main();
