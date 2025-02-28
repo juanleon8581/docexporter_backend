@@ -5,7 +5,7 @@ export class AppRoutes {
   static get routes(): Router {
     const router = Router();
 
-    router.use("/api/todos", UsersRoutes.routes);
+    router.use("/api/users", UsersRoutes.routes);
 
     return router;
   }
