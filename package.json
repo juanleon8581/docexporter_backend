@@ -30,6 +30,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/compression": "^1.7.5"
+    "@types/compression": "^1.7.5",
+    "dotenv-cli": "^8.0.0"
   }
 }
