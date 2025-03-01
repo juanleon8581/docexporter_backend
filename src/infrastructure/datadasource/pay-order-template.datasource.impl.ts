@@ -6,7 +6,9 @@ import {
 } from "@/domain/dtos";
 import { PayOrderTemplateEntity } from "@/domain/entities";
 
-export class PayOrderTemplateImpl implements PayOrderTemplateDatasource {
+export class PayOrderTemplateDatasourceImpl
+  implements PayOrderTemplateDatasource
+{
   async create(
     dto: CreatePayOrderTemplateDto
   ): Promise<PayOrderTemplateEntity> {
