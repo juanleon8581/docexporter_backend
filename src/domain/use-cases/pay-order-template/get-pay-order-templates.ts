@@ -5,7 +5,7 @@ interface GetPayOrderTemplatesUseCase {
   execute(): Promise<PayOrderTemplateEntity[]>;
 }
 
-export class PayOrderTemplate implements GetPayOrderTemplatesUseCase {
+export class GetPayOrderTemplates implements GetPayOrderTemplatesUseCase {
   constructor(private readonly repository: PayOrderTemplateRepository) {}
 
   execute(): Promise<PayOrderTemplateEntity[]> {
