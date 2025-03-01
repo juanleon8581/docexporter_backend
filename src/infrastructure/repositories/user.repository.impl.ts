@@ -5,6 +5,7 @@ import { UserRepository } from "@/domain/repositories";
 
 export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly datasource: UserDataSource) {}
+
   create(createUserDto: CreateUserDto): Promise<UserEntity> {
     return this.datasource.create(createUserDto);
   }
@@ -16,9 +17,11 @@ export class UserRepositoryImpl implements UserRepository {
   getAll(): Promise<UserEntity[]> {
     return this.datasource.getAll();
   }
+
   getById(id: string): Promise<UserEntity> {
     return this.datasource.getById(id);
   }
+
   deleteById(id: string): Promise<UserEntity> {
     return this.datasource.deleteById(id);
   }
