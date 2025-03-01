@@ -19,7 +19,7 @@ export class PayOrderTemplateRepositoryImpl
     return this.datasource.update(dto);
   }
 
-  getAll(): Promise<PayOrderTemplateEntity> {
+  getAll(): Promise<PayOrderTemplateEntity[]> {
     return this.datasource.getAll();
   }
 
