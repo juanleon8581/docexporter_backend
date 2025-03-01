@@ -10,7 +10,7 @@ import { GetPayOrderTemplates } from "@/domain/use-cases/pay-order-template/get-
 import { UpdatePayOrderTemplate } from "@/domain/use-cases/pay-order-template/update-pay-order-template";
 import { DeletePayOrderTemplate } from "@/domain/use-cases/pay-order-template/delete-pay-order-template";
 
-export class PayOrderTemplate {
+export class PayOrderTemplateController {
   constructor(
     private readonly payOrderTemplateRepository: PayOrderTemplateRepository
   ) {}
