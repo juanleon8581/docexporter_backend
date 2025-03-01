@@ -19,14 +19,14 @@ export class UserController {
     new CreateUser(this.userRepository)
       .execute(createUserDto!)
       .then((user) => res.json(user))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json(error));
   };
 
   public getUsers = (req: Request, res: Response) => {
     new GetUsers(this.userRepository)
       .execute()
       .then((users) => res.json(users))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json(error));
   };
 
   public getUserById = (req: Request, res: Response) => {
@@ -35,17 +35,17 @@ export class UserController {
     new GetUser(this.userRepository)
       .execute(id)
       .then((user) => res.json(user))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json(error));
   };
 
   public updateUser = (req: Request, res: Response) => {
     const [error, updateUserDto] = UpdateUserDto.create(req.body);
-    if (error) return res.status(400).json({ error });
+    if (error) return res.status(400).json(error);
 
     new UpdateUser(this.userRepository)
       .execute(updateUserDto!)
       .then((user) => res.json(user))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json(error));
   };
   public deleteUser = (req: Request, res: Response) => {
     const { id } = req.params;
@@ -53,6 +53,6 @@ export class UserController {
     new DeleteUser(this.userRepository)
       .execute(id)
       .then((user) => res.json(user))
-      .catch((error) => res.status(400).json({ error }));
+      .catch((error) => res.status(400).json(error));
   };
 }
