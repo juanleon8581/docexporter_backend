@@ -1,5 +1,6 @@
 export class UpdatePayOrderTemplateDto {
   constructor(
+    public readonly userId: string,
     public readonly id: string,
     public readonly nameEntry: string,
     public readonly nameFor?: string,
@@ -13,14 +14,24 @@ export class UpdatePayOrderTemplateDto {
   static create(props: {
     [key: string]: any;
   }): [string?, UpdatePayOrderTemplateDto?] {
-    const { id, nameEntry, nameFor, nitFor, dni, role, bank, accountNumber } =
-      props;
+    const {
+      userId,
+      id,
+      nameEntry,
+      nameFor,
+      nitFor,
+      dni,
+      role,
+      bank,
+      accountNumber,
+    } = props;
 
-    if (!id || !nameEntry) return ["Invalid Data"];
+    if (!userId || !id || !nameEntry) return ["Invalid Data"];
 
     return [
       ,
       new UpdatePayOrderTemplateDto(
+        userId,
         id,
         nameEntry,
         nameFor,
