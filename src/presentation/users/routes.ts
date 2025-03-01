@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { UserController } from "@/presentation/users/controller";
-import { UserDatasourceImpl } from "@/infrastructure/tadasource/user.datasource.impl";
+import { UserDatasourceImpl } from "@/infrastructure/datadasource/user.datasource.impl";
 import { UserRepositoryImpl } from "@/infrastructure/repositories/user.repository.impl";
 
 export class UsersRoutes {
