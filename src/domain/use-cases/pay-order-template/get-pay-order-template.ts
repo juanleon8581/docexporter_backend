@@ -9,6 +9,6 @@ export class GetPayOrderTemplate implements GetPayOrderTemplateUseCase {
   constructor(private readonly repository: PayOrderTemplateRepository) {}
 
   execute(id: string): Promise<PayOrderTemplateEntity> {
-    return this.repository.deleteById(id);
+    return this.repository.getById(id);
   }
 }
