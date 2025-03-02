@@ -24,10 +24,10 @@ export class PayOrderTemplateRepositoryImpl
   }
 
   getById(id: string): Promise<PayOrderTemplateEntity> {
-    return this.datasource.deleteById(id);
+    return this.datasource.getById(id);
   }
 
   deleteById(id: string): Promise<PayOrderTemplateEntity> {
-    return this.datasource.getById(id);
+    return this.datasource.deleteById(id);
   }
 }
