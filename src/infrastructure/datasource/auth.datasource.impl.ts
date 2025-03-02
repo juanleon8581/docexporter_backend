@@ -26,6 +26,8 @@ export class AuthDatasourceImpl implements AuthDatasource {
     return AuthEntity.fromJson({
       id: data.user.id,
       email: data.user.email,
+      name: dto.name,
+      lastname: dto.lastname,
       access_token: data.session?.access_token,
       refresh_token: data.session?.refresh_token,
     });

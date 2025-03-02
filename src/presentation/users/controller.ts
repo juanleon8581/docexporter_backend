@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserRepository } from "@/domain/repositories";
-import { CreateUserDto, UpdateUserDto } from "@/domain/dtos";
+import { UpdateUserDto } from "@/domain/dtos";
 import {
   CreateUser,
   DeleteUser,
@@ -8,16 +8,22 @@ import {
   GetUsers,
   UpdateUser,
 } from "@/domain/use-cases";
+import { RegisterDto } from "@/domain/dtos/auth/register.dto";
+import { AuthRepository } from "@/domain/repositories/auth.repository";
 
 export class UserController {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly authRepository: AuthRepository,
+    private readonly userRepository: UserRepository
+  ) {}
 
   public createUser = (req: Request, res: Response) => {
-    const [error, createUserDto] = CreateUserDto.create(req.body);
+    const [error, registerDto] = RegisterDto.create(req.body);
+
     if (error) return res.status(400).json({ error });
 
-    new CreateUser(this.userRepository)
-      .execute(createUserDto!)
+    new CreateUser(this.authRepository, this.userRepository)
+      .execute(registerDto!)
       .then((user) => res.json(user))
       .catch((error) => res.status(400).json(error));
   };
