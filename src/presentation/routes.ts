@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UsersRoutes } from "./users/routes";
 import { PayOrderTemplateRoutes } from "./pay-order-template/routes";
+import { AuthRoutes } from "./auth/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -8,6 +9,7 @@ export class AppRoutes {
 
     router.use("/api/users", UsersRoutes.routes);
     router.use("/api/payorder", PayOrderTemplateRoutes.routes);
+    router.use("/api/auth", AuthRoutes.routes);
 
     return router;
   }
