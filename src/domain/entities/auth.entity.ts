@@ -2,15 +2,25 @@ export class AuthEntity {
   constructor(
     public readonly id: string,
     public readonly email: string,
+    public readonly name: string,
+    public readonly lastname: string,
     public readonly accessToken?: string,
     public readonly refreshToken?: string,
     public readonly createdAt: Date = new Date()
   ) {}
 
   static fromJson(json: { [key: string]: any }): AuthEntity {
-    const { id, email, access_token, refresh_token, created_at } = json;
+    const {
+      id,
+      email,
+      name,
+      lastname,
+      access_token,
+      refresh_token,
+      created_at,
+    } = json;
 
-    if (!id || !email) {
+    if (!id || !email || !name || !lastname) {
       throw new Error("Invalid JSON for AuthEntity");
     }
 
@@ -22,6 +32,8 @@ export class AuthEntity {
     return new AuthEntity(
       id,
       email,
+      name,
+      lastname,
       access_token,
       refresh_token,
       createdAtProcessed
