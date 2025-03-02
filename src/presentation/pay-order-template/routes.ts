@@ -16,8 +16,8 @@ export class PayOrderTemplateRoutes {
       controller.createPayOrderTemplate(req, res);
     });
 
-    router.get("/", controller.getPayOrderTemplate);
-    router.get("/:id", controller.getPayOrderTemplates);
+    router.get("/", controller.getPayOrderTemplates);
+    router.get("/:id", controller.getPayOrderTemplate);
 
     router.put("/", (req: Request, res: Response) => {
       controller.updatePayOrderTemplate(req, res);
