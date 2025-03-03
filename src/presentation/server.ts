@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import compression from "compression";
+import { ErrorMiddleware } from "@/middleware/error.middleware";
 
 interface Options {
   port: number;
@@ -25,6 +26,9 @@ export class Server {
 
     //* Routes
     this.app.use(this.routes);
+
+    //* Error Middleware
+    this.app.use(ErrorMiddleware.handleError);
 
     this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`);
