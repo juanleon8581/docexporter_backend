@@ -1,3 +1,5 @@
+import { BadRequestError } from "@/errors/bad-request-error";
+
 export class PayOrderTemplateEntity {
   constructor(
     public readonly id: string,
@@ -35,22 +37,22 @@ export class PayOrderTemplateEntity {
     } = json;
 
     if (!id || !nameEntry) {
-      throw new Error("Invalid JSON");
+      throw new BadRequestError("Invalid JSON data");
     }
 
     const createdAtProcessed: Date | undefined = this.processDate(createdAt);
     if (!createdAtProcessed || isNaN(createdAtProcessed.getTime())) {
-      throw new Error("Invalid date");
+      throw new BadRequestError("Invalid date");
     }
 
     const updatedAtProcessed: Date | undefined = this.processDate(updatedAt);
     if (!updatedAtProcessed || isNaN(updatedAtProcessed.getTime())) {
-      throw new Error("Invalid date");
+      throw new BadRequestError("Invalid date");
     }
 
     const deletedAtProcessed: Date | undefined = this.processDate(deletedAt);
     if (deletedAtProcessed && isNaN(deletedAtProcessed.getTime())) {
-      throw new Error("Invalid date");
+      throw new BadRequestError("Invalid date");
     }
 
     return new PayOrderTemplateEntity(
