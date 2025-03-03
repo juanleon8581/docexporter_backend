@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UsersRoutes } from "./users/routes/routes";
-import { PayOrderTemplateRoutes } from "./pay-order-template/routes";
+import { PayOrderTemplateRoutes } from "./pay-order-template/routes/routes";
 import { AuthRoutes } from "./auth/routes";
 
 export class AppRoutes {
