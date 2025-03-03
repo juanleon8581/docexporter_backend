@@ -12,15 +12,13 @@ export class PayOrderTemplateRoutes {
     const repository = new PayOrderTemplateRepositoryImpl(dataSource);
     const controller = new PayOrderTemplateController(repository);
 
+    router.use(AuthMiddleware.validateJWT);
+
     router.post("/", (req: Request, res: Response) => {
       controller.createPayOrderTemplate(req, res);
     });
 
-    router.get(
-      "/",
-      [AuthMiddleware.validateJWT],
-      controller.getPayOrderTemplates
-    );
+    router.get("/", controller.getPayOrderTemplates);
     router.get("/:id", controller.getPayOrderTemplate);
 
     router.put("/", (req: Request, res: Response) => {
