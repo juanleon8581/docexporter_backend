@@ -7,6 +7,9 @@ import { RegisterDto } from "@/domain/dtos/auth/register.dto";
 import { AuthEntity } from "@/domain/entities/auth.entity";
 
 import envs from "@/config/envs";
+import { NotFoundError } from "@/errors/not-found-error";
+import { BadRequestError } from "@/errors/bad-request-error";
+import { UnauthorizedError } from "@/errors/unauthorized-error";
 
 export class AuthDatasourceImpl implements AuthDatasource {
   private readonly supabase;
@@ -21,8 +24,8 @@ export class AuthDatasourceImpl implements AuthDatasource {
       password: dto.password,
     });
 
-    if (error) throw new Error(error.message);
-    if (!data.user) throw new Error("No user returned from Supabase");
+    if (error) throw new BadRequestError(error.message);
+    if (!data.user) throw new NotFoundError("Invalid User");
 
     return AuthEntity.fromJson({
       id: data.user.id,
@@ -40,8 +43,9 @@ export class AuthDatasourceImpl implements AuthDatasource {
       password: dto.password,
     });
 
-    if (error) throw new Error(error.message);
-    if (!data.user || !data.session) throw new Error("Invalid login response");
+    if (error) throw new BadRequestError(error.message);
+    if (!data.user || !data.session)
+      throw new NotFoundError("Invalid User or Password");
 
     const dbUser = await prisma.user.findUnique({
       where: {
@@ -49,7 +53,7 @@ export class AuthDatasourceImpl implements AuthDatasource {
         deleted: false,
       },
     });
-    if (!dbUser) throw new Error("Invalid login response");
+    if (!dbUser) throw new NotFoundError("Invalid User or Password");
 
     return AuthEntity.fromJson({
       id: data.user.id,
@@ -66,6 +70,6 @@ export class AuthDatasourceImpl implements AuthDatasource {
       scope: "global",
     });
 
-    if (error) throw new Error(error.message);
+    if (error) throw new UnauthorizedError(error.message);
   }
 }

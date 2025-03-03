@@ -1,3 +1,5 @@
+import { BadRequestError } from "@/errors/bad-request-error";
+
 export class AuthEntity {
   constructor(
     public readonly id: string,
@@ -21,12 +23,12 @@ export class AuthEntity {
     } = json;
 
     if (!id || !email || !name || !lastname) {
-      throw new Error("Invalid JSON for AuthEntity");
+      throw new BadRequestError("Invalid JSON for AuthEntity");
     }
 
     const createdAtProcessed = new Date(created_at || Date.now());
     if (isNaN(createdAtProcessed.getTime())) {
-      throw new Error("Invalid date");
+      throw new BadRequestError("Invalid date");
     }
 
     return new AuthEntity(
