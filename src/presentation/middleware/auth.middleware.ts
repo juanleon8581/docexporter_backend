@@ -5,7 +5,6 @@ import envs from "@/config/envs";
 interface DecodedToken {
   id: string;
   email: string;
-  [key: string]: unknown;
 }
 
 declare global {
@@ -16,31 +15,33 @@ declare global {
   }
 }
 
-export const authMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const token = req.headers.authorization?.split(" ")[1];
-
-  if (!token) {
-    return res.status(401).json({ error: "No token provided" });
-  }
-
-  try {
-    const decoded = await JwtAdapter.validateToken<DecodedToken>(
-      token,
-      envs.JWT_SECRET
-    );
-
-    if (!decoded) {
-      return res.status(401).json({ error: "Invalid or expired token" });
+export class AuthMiddleware {
+  static validateJWT(req: Request, res: Response, next: NextFunction) {
+    const authorization = req.header("Authorization");
+    if (!authorization) {
+      res.status(401).json({ error: "No token provided" });
+      return;
+    }
+    if (!authorization.startsWith("Bearer ")) {
+      res.status(401).json({ error: "Invalid Bearer token format" });
+      return;
     }
 
-    req.user = decoded;
+    const token = authorization.split(" ").at(1) || "";
 
-    next();
-  } catch (error) {
-    return res.status(500).json({ error: "Internal server error" });
+    JwtAdapter.validateToken<DecodedToken>(token, envs.JWT_SECRET)
+      .then((payload) => {
+        if (!payload) {
+          res.status(401).json({ error: "Invalid or expired token" });
+          return;
+        }
+
+        req.user = payload;
+        next();
+      })
+      .catch((error) => {
+        res.status(500).json({ error, errorMsg: "Internal server error" });
+        return;
+      });
   }
-};
+}

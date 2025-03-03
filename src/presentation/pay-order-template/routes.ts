@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { PayOrderTemplateController } from "./controller";
 import { PayOrderTemplateRepositoryImpl } from "@/infrastructure/repositories/pay-order-template.repository.impl";
 import { PayOrderTemplateDatasourceImpl } from "@/infrastructure/datasource/pay-order-template.datasource.impl";
+import { AuthMiddleware } from "../middleware/auth.middleware";
 
 export class PayOrderTemplateRoutes {
   static get routes(): Router {
@@ -16,7 +16,11 @@ export class PayOrderTemplateRoutes {
       controller.createPayOrderTemplate(req, res);
     });
 
-    router.get("/", controller.getPayOrderTemplates);
+    router.get(
+      "/",
+      [AuthMiddleware.validateJWT],
+      controller.getPayOrderTemplates
+    );
     router.get("/:id", controller.getPayOrderTemplate);
 
     router.put("/", (req: Request, res: Response) => {

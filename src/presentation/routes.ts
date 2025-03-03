@@ -8,8 +8,8 @@ export class AppRoutes {
     const router = Router();
 
     router.use("/api/users", UsersRoutes.routes);
-    router.use("/api/payorder", PayOrderTemplateRoutes.routes);
     router.use("/api/auth", AuthRoutes.routes);
+    router.use("/api/payorder", PayOrderTemplateRoutes.routes);
 
     return router;
   }
