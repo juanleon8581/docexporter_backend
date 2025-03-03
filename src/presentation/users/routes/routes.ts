@@ -22,9 +22,7 @@ export class UsersRoutes {
     router.get("/", userController.getUsers);
     router.get("/:id", userController.getUserById);
 
-    router.put("/", (req: Request, res: Response) => {
-      userController.updateUser(req, res);
-    });
+    router.put("/", userController.updateUser);
 
     router.delete("/:id", userController.deleteUser);
 
