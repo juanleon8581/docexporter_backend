@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { AuthController } from "./controllers/controller";
+import { AuthController } from "../controllers/controller";
 import { AuthDatasourceImpl } from "@/infrastructure/datasource/auth.datasource.impl";
 
 export class AuthRoutes {

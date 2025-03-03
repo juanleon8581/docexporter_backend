@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
-import { PayOrderTemplateController } from "./controllers/controller";
 import { PayOrderTemplateRepositoryImpl } from "@/infrastructure/repositories/pay-order-template.repository.impl";
 import { PayOrderTemplateDatasourceImpl } from "@/infrastructure/datasource/pay-order-template.datasource.impl";
-import { AuthMiddleware } from "../middleware/auth.middleware";
+import { PayOrderTemplateController } from "../controllers/controller";
+import { AuthMiddleware } from "@/middleware/auth.middleware";
 
 export class PayOrderTemplateRoutes {
   static get routes(): Router {
