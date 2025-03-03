@@ -13,7 +13,10 @@ export class AuthController {
 
   public register = (req: Request, res: Response) => {
     const [error, registerDto] = RegisterDto.create(req.body);
-    if (error) return res.status(400).json({ error });
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
 
     new RegisterAuth(this.repository)
       .execute(registerDto!)
@@ -23,7 +26,10 @@ export class AuthController {
 
   public login = (req: Request, res: Response) => {
     const [error, loginDto] = LoginDto.create(req.body);
-    if (error) return res.status(400).json({ error });
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
 
     new LoginAuth(this.repository)
       .execute(loginDto!)
@@ -35,7 +41,10 @@ export class AuthController {
     const [error, logoutDto] = LogoutDto.create({
       accessToken: req.headers.authorization?.split(" ")[1],
     });
-    if (error) return res.status(400).json({ error });
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
 
     new LogoutAuth(this.repository)
       .execute(logoutDto!)
