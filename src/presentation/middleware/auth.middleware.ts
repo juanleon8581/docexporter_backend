@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { JwtAdapter } from "@/config/jwt.adapter";
+import { JwtAdapter } from "@/config/adapters/jwt.adapter";
 import envs from "@/config/envs";
 
 interface DecodedToken {
