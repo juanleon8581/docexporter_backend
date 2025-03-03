@@ -20,7 +20,10 @@ export class PayOrderTemplateController {
       req.body
     );
 
-    if (error) return res.status(400).json({ error });
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
 
     new CreatePayOrder(this.payOrderTemplateRepository)
       .execute(createPayOrderTemplateDto!)
@@ -49,7 +52,10 @@ export class PayOrderTemplateController {
       req.body
     );
 
-    if (error) return res.status(400).json({ error });
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
 
     new UpdatePayOrderTemplate(this.payOrderTemplateRepository)
       .execute(updatePayOrderTemplateDto!)

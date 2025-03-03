@@ -14,16 +14,12 @@ export class PayOrderTemplateRoutes {
 
     router.use(AuthMiddleware.validateJWT);
 
-    router.post("/", (req: Request, res: Response) => {
-      controller.createPayOrderTemplate(req, res);
-    });
+    router.post("/", controller.createPayOrderTemplate);
 
     router.get("/", controller.getPayOrderTemplates);
     router.get("/:id", controller.getPayOrderTemplate);
 
-    router.put("/", (req: Request, res: Response) => {
-      controller.updatePayOrderTemplate(req, res);
-    });
+    router.put("/", controller.updatePayOrderTemplate);
 
     router.delete("/:id", controller.deletePayOrderTemplate);
 
