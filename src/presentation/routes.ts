@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UsersRoutes } from "./users/routes";
+import { UsersRoutes } from "./users/routes/routes";
 import { PayOrderTemplateRoutes } from "./pay-order-template/routes";
 import { AuthRoutes } from "./auth/routes";
 

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { UserController } from "@/presentation/users/controller";
+import { UserController } from "@/presentation/users/controllers/controller";
 import { UserDatasourceImpl } from "@/infrastructure/datasource/user.datasource.impl";
 import { UserRepositoryImpl } from "@/infrastructure/repositories/user.repository.impl";
 import { AuthDatasourceImpl } from "@/infrastructure/datasource/auth.datasource.impl";
