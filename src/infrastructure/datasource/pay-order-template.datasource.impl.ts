@@ -5,6 +5,7 @@ import {
   UpdatePayOrderTemplateDto,
 } from "@/domain/dtos";
 import { PayOrderTemplateEntity } from "@/domain/entities";
+import { NotFoundError } from "@/errors/not-found-error";
 
 export class PayOrderTemplateDatasourceImpl
   implements PayOrderTemplateDatasource
@@ -35,7 +36,7 @@ export class PayOrderTemplateDatasourceImpl
       },
     });
 
-    if (!payOrderTemplate) throw "Template no found";
+    if (!payOrderTemplate) throw new NotFoundError("Template no found");
 
     return PayOrderTemplateEntity.fromJson(payOrderTemplate);
   }

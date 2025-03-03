@@ -2,6 +2,7 @@ import { prisma } from "@/data/postgres";
 import { UserDataSource } from "@/domain/datasources";
 import { CreateUserDto, UpdateUserDto } from "@/domain/dtos";
 import { UserEntity } from "@/domain/entities";
+import { NotFoundError } from "@/errors/not-found-error";
 
 export class UserDatasourceImpl implements UserDataSource {
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
@@ -26,7 +27,7 @@ export class UserDatasourceImpl implements UserDataSource {
       },
     });
 
-    if (!user) throw "user not found";
+    if (!user) throw new NotFoundError("user not found");
 
     return UserEntity.fromJson(user);
   }
