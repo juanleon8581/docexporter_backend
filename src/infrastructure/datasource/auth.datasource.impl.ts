@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { prisma } from "@/data/postgres";
 import { AuthDatasource } from "@/domain/datasources/auth.datasource";
 import { LoginDto } from "@/domain/dtos/auth/login.dto";
 import { LogoutDto } from "@/domain/dtos/auth/logout.dto";
@@ -42,9 +43,19 @@ export class AuthDatasourceImpl implements AuthDatasource {
     if (error) throw new Error(error.message);
     if (!data.user || !data.session) throw new Error("Invalid login response");
 
+    const dbUser = await prisma.user.findUnique({
+      where: {
+        authId: data.user.id,
+        deleted: false,
+      },
+    });
+    if (!dbUser) throw new Error("Invalid login response");
+
     return AuthEntity.fromJson({
       id: data.user.id,
       email: data.user.email,
+      name: dbUser.name,
+      lastname: dbUser.lastname,
       access_token: data.session.access_token,
       refresh_token: data.session.refresh_token,
     });
