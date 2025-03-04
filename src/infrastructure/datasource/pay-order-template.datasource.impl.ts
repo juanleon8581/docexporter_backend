@@ -75,14 +75,15 @@ export class PayOrderTemplateDatasourceImpl
     const { id } = dto;
     await this.getById(id);
 
+    const encryptedDto = this.encryptSensitiveData(dto);
     const updatedPayOrderTemplate = await prisma.payOrderTemplate.update({
       where: {
         id,
       },
-      data: dto,
+      data: encryptedDto,
     });
 
-    return PayOrderTemplateEntity.fromJson(updatedPayOrderTemplate);
+    return this.decryptSensitiveData(updatedPayOrderTemplate);
   }
 
   async deleteById(id: string): Promise<PayOrderTemplateEntity> {
