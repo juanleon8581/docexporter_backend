@@ -9,6 +9,12 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(32, { message: "Must have almost 32 characters" }),
   SUPABASE_URL: z.string(),
   SUPABASE_KEY: z.string(),
+  CRYPTO_SECRET: z
+    .string()
+    .length(64, { message: "Must be 64 hex characters (32 bytes)" }),
+  CRYPTO_IV: z
+    .string()
+    .length(32, { message: "Must be 32 hex characters (16 bytes)" }),
 });
 
 const loadEnv = () => {
