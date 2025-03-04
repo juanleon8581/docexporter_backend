@@ -52,7 +52,7 @@ export class PayOrderTemplateDatasourceImpl
     const allPayOrderTemplates = await prisma.payOrderTemplate.findMany();
 
     return allPayOrderTemplates.map((template) =>
-      PayOrderTemplateEntity.fromJson(template)
+      this.decryptSensitiveData(template)
     );
   }
 
@@ -66,7 +66,7 @@ export class PayOrderTemplateDatasourceImpl
 
     if (!payOrderTemplate) throw new NotFoundError("Template no found");
 
-    return PayOrderTemplateEntity.fromJson(payOrderTemplate);
+    return this.decryptSensitiveData(payOrderTemplate);
   }
 
   async update(
@@ -98,6 +98,6 @@ export class PayOrderTemplateDatasourceImpl
       },
     });
 
-    return PayOrderTemplateEntity.fromJson(payOrderDeleted);
+    return this.decryptSensitiveData(payOrderDeleted);
   }
 }
