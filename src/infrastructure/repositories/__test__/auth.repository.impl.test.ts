@@ -27,35 +27,17 @@ describe("AuthRepositoryImpl", () => {
 
     // Initialize repository with mock datasource
     repository = new AuthRepositoryImpl(mockDatasource);
+
+    jest.clearAllMocks();
   });
 
   describe("constructor", () => {
     it("should create an instance with the provided datasource", () => {
-      // Arrange
-      const mockDatasource: AuthDatasource = {
-        register: jest.fn(),
-        login: jest.fn(),
-        logout: jest.fn(),
-      };
-
-      // Act
-      const repository = new AuthRepositoryImpl(mockDatasource);
-
       // Assert
       expect(repository).toBeInstanceOf(AuthRepositoryImpl);
     });
 
     it("should properly assign the datasource to the instance", () => {
-      // Arrange
-      const mockDatasource: AuthDatasource = {
-        register: jest.fn(),
-        login: jest.fn(),
-        logout: jest.fn(),
-      };
-
-      // Act
-      const repository = new AuthRepositoryImpl(mockDatasource);
-
       // Assert - We need to test that the datasource is properly assigned
       // by verifying that methods call the datasource methods
       const registerDto: RegisterDto = {
@@ -70,11 +52,7 @@ describe("AuthRepositoryImpl", () => {
 
     it("should properly delegate register method to datasource", () => {
       // Arrange
-      const mockDatasource: AuthDatasource = {
-        register: jest.fn().mockResolvedValue(mockAuthEntity),
-        login: jest.fn(),
-        logout: jest.fn(),
-      };
+      mockDatasource.register = jest.fn().mockResolvedValue(mockAuthEntity);
 
       const repository = new AuthRepositoryImpl(mockDatasource);
       const registerDto: RegisterDto = {
@@ -94,12 +72,7 @@ describe("AuthRepositoryImpl", () => {
 
     it("should properly delegate login method to datasource", () => {
       // Arrange
-
-      const mockDatasource: AuthDatasource = {
-        register: jest.fn(),
-        login: jest.fn().mockResolvedValue(mockAuthEntity),
-        logout: jest.fn(),
-      };
+      mockDatasource.login = jest.fn().mockResolvedValue(mockAuthEntity);
 
       const repository = new AuthRepositoryImpl(mockDatasource);
       const loginDto: LoginDto = {
