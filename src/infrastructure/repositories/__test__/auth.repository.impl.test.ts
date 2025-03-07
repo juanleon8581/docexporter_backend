@@ -216,4 +216,50 @@ describe("AuthRepositoryImpl", () => {
       expect(result).toEqual(expectedResponse);
     });
   });
+
+  describe("login", () => {
+    const loginDto: LoginDto = {
+      email: "test@test.com",
+      password: "password",
+    };
+    it("should call Datasource login with the dto", async () => {
+      // Arrange
+
+      mockDatasource.login.mockResolvedValue(mockAuthEntity);
+
+      // Act
+
+      const result = await repository.login(loginDto);
+      // Assert
+      expect(mockDatasource.login).toHaveBeenCalledWith(loginDto);
+      expect(result).toEqual(mockAuthEntity);
+    });
+
+    it("should throw error when bad dto", () => {
+      // Arrange
+
+      const expectedError = new Error("Registration failed");
+      mockDatasource.login.mockRejectedValue(expectedError);
+
+      // Act
+
+      // Assert
+      expect(repository.login(loginDto)).rejects.toThrow(expectedError);
+      expect(mockDatasource.login).toHaveBeenCalledWith(loginDto);
+      expect(mockDatasource.login).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("logout", () => {
+    const logoutDto: LogoutDto = {
+      accessToken: "token123",
+    };
+
+    it("should do logout", () => {
+      // Assert
+      expect(repository.logout(logoutDto)).toBeUndefined();
+      expect(mockDatasource.logout).toHaveBeenCalledWith(logoutDto);
+      expect(mockDatasource.logout).toHaveBeenCalledTimes(1);
+    });
+  });
 });
