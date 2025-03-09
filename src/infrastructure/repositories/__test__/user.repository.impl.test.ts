@@ -141,8 +141,6 @@ describe("UserRepositoryImpl", () => {
       // Act
       const result = await repository.deleteById(userId);
 
-      console.log("🚧 Debug log 🚧 ", result); // TODO: Remove this console.log
-
       // Assert
       expect(mockDatasource.deleteById).toHaveBeenCalledWith(userId);
 
