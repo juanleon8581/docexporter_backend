@@ -1,5 +1,3 @@
-// File: src/infrastructure/datasource/__test__/auth.datasource.impl.test.ts
-
 import { AuthDatasourceImpl } from "../auth.datasource.impl";
 import { RegisterDto } from "@/domain/dtos/auth/register.dto";
 import { LoginDto } from "@/domain/dtos/auth/login.dto";
