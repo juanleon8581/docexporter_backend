@@ -1,2 +1,2 @@
 export { UserEntity } from "./user.entity";
-export { PayOrderTemplateEntity } from "./Pay-order-template.entity";
+export { PayOrderTemplateEntity } from "./pay-order-template.entity";
