@@ -24,6 +24,8 @@ const loadEnv = () => {
 
   const envVars = require("dotenv").config({ path: envFilePath });
 
+  console.log("🚧 Debug log 🚧 ", process.env); // TODO: Remove this console.log
+
   try {
     const envs = envSchema.parse(envVars.parsed);
     return envs;
