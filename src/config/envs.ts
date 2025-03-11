@@ -20,7 +20,7 @@ const envSchema = z.object({
 
 const loadEnv = () => {
   const nodeEnv = process.env.NODE_ENV ?? "dev";
-  const envFilePath = `.env.${nodeEnv}`;
+  const envFilePath = nodeEnv === "prod" ? ".env" : `.env.${nodeEnv}`;
 
   const envVars = require("dotenv").config({ path: envFilePath });
 
