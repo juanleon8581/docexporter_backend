@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pnpm build && node dist/index.js",
-    "build": "tsc",
+    "start": "node dist/index.js",
+    "build": "tsc && tsc-alias",
     "dev": "tsnd -r tsconfig-paths/register src/index.ts --watch",
     "prisma:migrate:dev": "dotenv -e .env.dev prisma migrate dev",
     "migrate:postgres:dev": "dotenv -e .env.dev -- prisma migrate dev",
@@ -41,6 +41,7 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.2.6",
     "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.11",
     "tsconfig-paths": "^4.2.0"
   }
 }
