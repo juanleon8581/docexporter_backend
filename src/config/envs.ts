@@ -6,6 +6,7 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
   DATABASE_PASSWORD: z.string(),
   DATABASE_URL: z.string().url({ message: "Must be a valid URL" }),
+  DIRECT_URL: z.string().url({ message: "Must be a valid URL" }),
   JWT_SECRET: z.string().min(32, { message: "Must have almost 32 characters" }),
   SUPABASE_URL: z.string(),
   SUPABASE_KEY: z.string(),
