@@ -19,10 +19,16 @@ const envSchema = z.object({
 });
 
 const loadEnv = () => {
+  let envFilePath: string;
+  let envVars: any;
   const nodeEnv = process.env.NODE_ENV ?? "dev";
-  const envFilePath = nodeEnv === "prod" ? ".env" : `.env.${nodeEnv}`;
 
-  const envVars = require("dotenv").config({ path: envFilePath });
+  envVars = process.env;
+
+  if (nodeEnv !== "prod") {
+    envFilePath = `.env.${nodeEnv}`;
+    envVars = require("dotenv").config({ path: envFilePath });
+  }
 
   console.log("🚧 Debug log 🚧 ", process.env); // TODO: Remove this console.log
 
