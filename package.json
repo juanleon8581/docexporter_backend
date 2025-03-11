@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "tsc && tsc-alias",
+    "build": "prisma generate && tsc && tsc-alias",
     "dev": "tsnd -r tsconfig-paths/register src/index.ts --watch",
     "prisma:migrate:dev": "dotenv -e .env.dev prisma migrate dev",
     "migrate:postgres:dev": "dotenv -e .env.dev -- prisma migrate dev",
     "prisma:studio": "prisma studio",
     "compose:dev": "docker compose --env-file .env.dev up -d",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
