@@ -101,7 +101,10 @@ export class UserController {
   public createUser = (req: Request, res: Response) => {
     const [error, registerDto] = RegisterDto.create(req.body);
 
-    if (error) return res.status(400).json({ error });
+    if (error) {
+      res.status(400).json({ error });
+      return;
+    }
 
     new CreateUser(this.authRepository, this.userRepository)
       .execute(registerDto!)
