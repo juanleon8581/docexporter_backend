@@ -15,7 +15,7 @@ export class UsersRoutes {
     const authRepository = new AuthRepositoryImpl(authDatasource);
     const userController = new UserController(authRepository, userRepository);
 
-    router.post("/", userController.createUser);
+    router.post("/create", userController.createUser);
 
     router.get("/", userController.getUsers);
     router.get("/:id", userController.getUserById);
