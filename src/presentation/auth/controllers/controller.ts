@@ -78,7 +78,7 @@ export class AuthController {
    *     security:
    *       - bearerAuth: []
    *     requestBody:
-   *       required: true
+   *       required: false
    *       content:
    *         application/json:
    *           schema:
