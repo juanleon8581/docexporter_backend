@@ -76,9 +76,6 @@ export class PayOrderTemplateController {
    *                 id:
    *                   type: string
    *                   example: "template123"
-   *                 userId:
-   *                   type: string
-   *                   example: "user123"
    *                 nameEntry:
    *                   type: string
    *                   example: "Monthly Payment"
@@ -97,6 +94,9 @@ export class PayOrderTemplateController {
    *                 bank:
    *                   type: string
    *                   example: "Bank of Example"
+   *                 deleted:
+   *                   type: boolean
+   *                   example: false
    *                 accountNumber:
    *                   type: string
    *                   example: "1234567890"
@@ -389,6 +389,9 @@ export class PayOrderTemplateController {
    *                   type: string
    *                   format: date-time
    *                   example: "2023-01-02T00:00:00.000Z"
+   *                 deleted:
+   *                   type: boolean
+   *                   example: false
    *       400:
    *         description: Invalid data or unauthorized
    *         content:
