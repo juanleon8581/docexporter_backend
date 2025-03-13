@@ -22,7 +22,7 @@ export class UserController {
    * /api/users/create:
    *   post:
    *     summary: create a user in own database
-   *     tags: [User]
+   *     tags: [User, Auth]
    *     security:
    *       - bearerAuth: []
    *     requestBody:
