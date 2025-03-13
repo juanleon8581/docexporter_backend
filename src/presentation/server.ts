@@ -1,6 +1,8 @@
 import express, { Router } from "express";
 import compression from "compression";
 import { ErrorMiddleware } from "@/middleware/error.middleware";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "@/config/swagger";
 
 interface Options {
   port: number;
@@ -24,6 +26,9 @@ export class Server {
     this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
     this.app.use(compression());
 
+    //* Swagger UI
+    this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
     //* Routes
     this.app.use(this.routes);
 
@@ -32,6 +37,9 @@ export class Server {
 
     this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`);
+      console.log(
+        `Swagger UI available at http://localhost:${this.port}/api-docs`
+      );
     });
   }
 }

@@ -11,19 +11,51 @@ import { Request, Response } from "express";
 export class AuthController {
   constructor(private readonly repository: AuthRepository) {}
 
-  public register = (req: Request, res: Response) => {
-    const [error, registerDto] = RegisterDto.create(req.body);
-    if (error) {
-      res.status(400).json({ error });
-      return;
-    }
-
-    new RegisterAuth(this.repository)
-      .execute(registerDto!)
-      .then((auth) => res.json(auth))
-      .catch((error) => res.status(400).json({ error: error.message }));
-  };
-
+  /**
+   * @openapi
+   * /api/auth/login:
+   *   post:
+   *     summary: Login a user
+   *     tags: [Auth]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               email:
+   *                 type: string
+   *                 example: john.doe@example.com
+   *               password:
+   *                 type: string
+   *                 example: password123
+   *             required:
+   *               - email
+   *               - password
+   *     responses:
+   *       200:
+   *         description: User logged in successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 id:
+   *                   type: string
+   *                 email:
+   *                   type: string
+   *                 name:
+   *                   type: string
+   *                 lastname:
+   *                   type: string
+   *                 accessToken:
+   *                   type: string
+   *                 refreshToken:
+   *                   type: string
+   *       400:
+   *         description: Invalid credentials
+   */
   public login = (req: Request, res: Response) => {
     const [error, loginDto] = LoginDto.create(req.body);
     if (error) {
@@ -37,6 +69,32 @@ export class AuthController {
       .catch((error) => res.status(400).json({ error: error.message }));
   };
 
+  /**
+   * @openapi
+   * /api/auth/logout:
+   *   post:
+   *     summary: Logout a user
+   *     tags: [Auth]
+   *     security:
+   *       - bearerAuth: []
+   *     requestBody:
+   *       required: false
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               accessToken:
+   *                 type: string
+   *                 example: your_jwt_token
+   *             required:
+   *               - accessToken
+   *     responses:
+   *       204:
+   *         description: User logged out successfully
+   *       400:
+   *         description: Invalid token
+   */
   public logout = (req: Request, res: Response) => {
     const [error, logoutDto] = LogoutDto.create({
       accessToken: req.headers.authorization?.split(" ")[1],
